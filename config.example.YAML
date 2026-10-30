@@ -1,0 +1,27 @@
+# Copie este arquivo para config.YAML e ajuste os caminhos e a câmera.
+source: "0"
+model: yolo26n.pt
+classes: [14]
+conf: 0.15
+imgsz: 640
+max_width: 960
+threads: 4
+smooth: 30
+tracker: bytetrack.yaml
+min_count: 0
+alert_seconds: 30
+no_show: false
+log: contagem.csv
+log_interval: 60
+save_video: null
+db: dados.db
+db_interval: 10
+captures_dir: capturas
+capture_interval: 300
+train_dir: dataset/images/raw
+train_interval: 0
+auto_dataset: dataset
+auto_interval: 30
+keep_days: 30
+alert_dir: alertas
+

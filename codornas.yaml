@@ -1,0 +1,7 @@
+# Configuração do dataset para treino (formato YOLO)
+path: dataset          # pasta raiz do dataset
+train: images/train    # imagens de treino (relativo a "path")
+val: images/val        # imagens de validação (relativo a "path")
+ 
+names:
+  0: codorna
