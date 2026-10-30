@@ -1,0 +1,43 @@
+# Configuração padrão do detectar_codornas.py
+# Qualquer opção também pode ser passada na linha de comando (ela vence este arquivo).
+# Os nomes são os mesmos das opções do programa, com "_" no lugar de "-".
+
+# --- Câmera ---
+# IP Webcam (celular):  http://IP_DO_CELULAR:8080/video
+# Câmera RTSP:          rtsp://usuario:senha@IP:554/stream1
+# Webcam do PC:         0
+source: "http://192.168.1.13:8080/video"
+
+# --- Modelo ---
+# Sem modelo treinado: yolo26n.pt com classes [14] (ave genérica do COCO).
+# Depois do treino: model: best.pt e apague a linha "classes".
+model: yolo26n.pt
+classes: [14]
+conf: 0.15         # confiança mínima (0 a 1). Baixe para detectar mais, suba para errar menos
+imgsz: 640         # tamanho de entrada. 416 é mais rápido; 640 enxerga aves menores
+max_width: 960     # reduz quadros mais largos que isso antes de processar
+threads: 4         # threads de CPU do PyTorch
+
+# --- Contagem ---
+smooth: 30         # quadros usados na contagem estável (mais = mais calma, mais lenta)
+tracker: bytetrack.yaml      # rastreador integrado ao Ultralytics
+min_count: 0       # alerta se a contagem ficar abaixo disso (0 = desligado)
+alert_seconds: 30  # tempo abaixo do mínimo antes de alertar
+
+# --- Saída ---
+no_show: false     # true = não abrir janela (modo servidor)
+log: contagem.csv
+log_interval: 60   # segundos entre registros no CSV
+save_video: null   # ex.: saida.mp4 para gravar o vídeo anotado
+
+# --- Painel (dashboard.py) ---
+db: dados.db
+db_interval: 10          # segundos entre amostras no banco
+captures_dir: capturas
+capture_interval: 300    # segundos entre fotos periódicas (0 = desligado)
+train_dir: dataset/images/raw
+train_interval: 0        # maior que 0 guarda fotos sem caixas para treino manual (ex.: 600)
+auto_dataset: dataset    # imagens + rótulos YOLO gerados pelas detecções
+auto_interval: 30        # segundos entre amostras automáticas (0 = desligado)
+keep_days: 30            # histórico mantido (0 = tudo)
+alert_dir: alertas
